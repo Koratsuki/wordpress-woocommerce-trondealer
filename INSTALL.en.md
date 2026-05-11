@@ -119,8 +119,8 @@ sudo apt install -y certbot python3-certbot-nginx
 In your server, just clone this repo:
 
 ```bash
-git clone https://github.com/user/repo.git
-cd repo
+git clone https://github.com/Koratsuki/wordpress-woocommerce-trondealer.git
+cd wordpress-woocommerce-trondealer
 ```
 
 Adjust variables according to your needs inside ./config directory and deploy stack. This is an automated wordpress install, so, modify and adjust:
