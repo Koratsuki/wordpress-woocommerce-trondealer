@@ -1,0 +1,112 @@
+---
+services:
+  db:
+    image: mariadb:12-noble
+    container_name: wp-db
+    restart: unless-stopped
+    env_file: ./config/db/db.env
+    volumes:
+      - ./config/db/db.conf:/etc/mysql/conf.d/db.cnf:ro
+      - ./data/mariadb:/var/lib/mysql
+    ports:
+      - "127.0.0.1:3306:3306"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/usr/local/bin/healthcheck.sh",
+          "--su=mysql",
+          "--connect",
+          "--innodb_initialized",
+        ]
+      timeout: 20s
+      retries: 10
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wp-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8000:80"
+    env_file: ./config/wp/wp.env
+    volumes:
+      - ./data/wordpress:/var/www/html
+      - ./config/wp/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+
+  redis:
+    image: redis:8-alpine
+    restart: unless-stopped
+    container_name: wp-redis
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+
+  # phpMyAdmin (Opcional)
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    container_name: wp-pma
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+    env_file: ./config/pma/pma.env
+
+  init:
+    image: wordpress:cli
+    container_name: wp-cli
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    volumes:
+      - ./data/wordpress:/var/www/html
+    user: "33:33"
+    environment:
+      - WP_CLI_CACHE_DIR=/tmp/wp-cli-cache
+      - PAGER=cat
+    env_file: ./config/wp/wp.env
+    command:
+      - /bin/sh
+      - -c
+      - |
+        if [ -f .setup_finished ]; then
+          echo 'The setup has already been completed. Skipping...'
+          exit 0
+        fi &&
+        echo 'WordPress is ready. Verifying installation...' &&
+        if ! wp core is-installed 2>/dev/null; then
+          echo 'Installing WordPress...' &&
+          wp core install \
+            --url="$$WP_URL" \
+            --title="$$WP_TITLE" \
+            --admin_user="$$WP_ADMIN_USER" \
+            --admin_password="$$WP_ADMIN_PASSWORD" \
+            --admin_email="$$WP_ADMIN_EMAIL" \
+            --skip-email 2>&1;
+        else
+          echo 'WordPress is already installed.';
+        fi &&
+        echo 'Installing WordPress plugins...' &&
+        for plugin in woocommerce redis-cache wordfence wordpress-seo stops-core-theme-and-plugin-updates simple-cloudflare-turnstile updraftplus hide-my-wp wp-mail-smtp wpforms-lite; do
+          if ! wp plugin is-installed $$plugin; then
+            wp plugin install $$plugin --activate 2>&1;
+          else
+            wp plugin activate $$plugin 2>&1;
+          fi;
+        done &&
+        if ! wp plugin is-installed trondealer-woocommerce; then
+          wp plugin install https://github.com/qvapay/trondealer-woocommerce/archive/master.zip --activate 2>&1;
+        else
+          wp plugin activate trondealer-woocommerce 2>&1;
+        fi &&
+        wp wc tool run install_pages --user=1 2>&1 &&
+        touch .setup_finished &&
+        echo 'Setup completed successfully'
+    restart: "no"

@@ -1,0 +1,6 @@
+imgs/*
+data/*
+
+# Misc
+.DS_Store
+wp-woocommerce-trondealer.code-workspace
