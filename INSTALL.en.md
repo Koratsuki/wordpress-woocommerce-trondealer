@@ -194,7 +194,8 @@ certbot --nginx -d store.trondealer.com
 
 Wait until finished and then go to the `WP_URL` variable value you have defined earlier. Nice, you will be able to see your shinning Wordpress up&running.
 
-#### 7. Trondealer plugin + other store plugins 
+#### 7. Trondealer plugin + other store plugins
+
 The stack comes with these plugins by default:
 
 - hide-my-wp. A security plugin.

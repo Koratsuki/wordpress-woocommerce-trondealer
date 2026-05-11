@@ -205,26 +205,18 @@ certbot --nginx -d store.trondealer.com
 Espera hasta que termine y luego ve al valor de la variable WP_URL que definiste anteriormente. ¡Bien, podrás ver tu flamante WordPress funcionando!
 
 7. Plugin Trondealer + otros plugins para la tienda
+
 El stack trae estos plugins por defecto:
 
-hide-my-wp. Un plugin de seguridad.
-
-redis-cache. Plugin de caché con Redis.
-
-simple-cloudflare-turnstile. Plugin de seguridad.
-
-stops-core-theme-and-plugin-updates. Plugin para actualizaciones.
-
-updraftplus. Plugin de copias de seguridad y restauración.
-
-woocommerce. Plugin de comercio electrónico para WordPress.
-
-wordfence. Un plugin de seguridad.
-
-wordpress-seo. Plugin de SEO.
-
-wp-mail-smtp. Plugin de correo para WordPress.
-
-wpforms-lite. Plugin de formularios para WordPress.
+- hide-my-wp. Un plugin de seguridad.
+- redis-cache. Plugin de caché con Redis.
+- simple-cloudflare-turnstile. Plugin de seguridad.
+- stops-core-theme-and-plugin-updates. Plugin para actualizaciones.
+- updraftplus. Plugin de copias de seguridad y restauración.
+- woocommerce. Plugin de comercio electrónico para WordPress.
+- wordfence. Un plugin de seguridad.
+- wordpress-seo. Plugin de SEO.
+- wp-mail-smtp. Plugin de correo para WordPress.
+- wpforms-lite. Plugin de formularios para WordPress.
 
 Todo lo que tienes que hacer es ir al menú de plugins en el escritorio de administración y configurarlos para que funcionen.
