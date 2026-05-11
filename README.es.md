@@ -75,7 +75,7 @@ Lee las notas de [Instalación](./INSTALL.es.md).
 - **Demostración / preproducción** – Levanta rápidamente una tienda representativa para presentaciones a clientes o aseguramiento de calidad.
 - **Aprendizaje** – Experimenta con los entresijos de WooCommerce, pasarelas de pago o personalizaciones en un entorno desechable.
 
-### Referencias - En inglés
+### Referencias
 
 Youtube: [https://www.youtube.com/watch?v=fAfTWrj7YoE](https://www.youtube.com/watch?v=fAfTWrj7YoE)
 
@@ -83,6 +83,6 @@ Guía: [https://trondealer.com/en/guides/woocommerce-stablecoins-tutorial](https
 
 Plugin: [https://trondealer.com/en/woocommerce](https://trondealer.com/en/woocommerce)
 
-GIthub: [https://github.com/qvapay/trondealer-woocommerce](https://github.com/qvapay/trondealer-woocommerce)
+Github: [https://github.com/qvapay/trondealer-woocommerce](https://github.com/qvapay/trondealer-woocommerce)
 
 Fees: [https://trondealer.com/en/pricing](https://trondealer.com/en/pricing)

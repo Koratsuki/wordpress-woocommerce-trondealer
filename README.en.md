@@ -83,6 +83,6 @@ Guide: [https://trondealer.com/en/guides/woocommerce-stablecoins-tutorial](https
 
 Plugin: [https://trondealer.com/en/woocommerce](https://trondealer.com/en/woocommerce)
 
-GIthub: [https://github.com/qvapay/trondealer-woocommerce](https://github.com/qvapay/trondealer-woocommerce)
+Github: [https://github.com/qvapay/trondealer-woocommerce](https://github.com/qvapay/trondealer-woocommerce)
 
 Fees: [https://trondealer.com/en/pricing](https://trondealer.com/en/pricing)
