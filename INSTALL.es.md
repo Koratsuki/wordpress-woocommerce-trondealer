@@ -220,3 +220,7 @@ El stack trae estos plugins por defecto:
 - wpforms-lite. Plugin de formularios para WordPress.
 
 Todo lo que tienes que hacer es ir al menú de plugins en el escritorio de administración y configurarlos para que funcionen.
+
+**Detalles:**
+
+Ajusta el header de nginx `add_header Content-Security-Policy` a tus necesidades; en ocasiones, puede romper tu sitio si está mal configurado.

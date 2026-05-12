@@ -210,3 +210,7 @@ The stack comes with these plugins by default:
 - wpforms-lite. Wordpress forms plugin.
 
 All you have to do is go to the plugins menu in the admin dashboard and configure it to make it work.
+
+**Details**:
+
+Adjust nginx header `add_header Content-Security-Policy` to your needs, sometimes, it can break your site if is badly configured.
